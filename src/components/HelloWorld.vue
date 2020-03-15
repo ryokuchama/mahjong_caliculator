@@ -9,76 +9,84 @@
         </select>
         <label>役</label>
       </div>
+    </div>
+    <div id="low" v-show="yaku < 5">
       <div id="basic">
         <h3>2.固定符かどうかを選択</h3>
         <form>
+          <input type="radio" id="other" value="20" v-model="b">
+          <label for="other">基本(20符)</label>
+          <br>
           <input type="radio" id="chi" value="25" v-model="b">
           <label for="chi">七対子(25符固定)</label>
+          <br>
+          <input type="radio" id="ptsumo" value="18" v-model="b">
+          <label for="ptsumo">平和ツモ(20符固定)</label>
+          <br>
           <input type="radio" id="pron" value="30" v-model="b">
           <label for="pron">平和ロン(30符固定)</label>
-          <input type="radio" id="other" value="20" v-model="b">
-          <label for="other">それ以外(20符)</label>
           <br>
           <div>{{ b }} 符</div>
         </form>
       </div>
+      <div id="opt" v-show="this.b==20">
+        <div id="agari">
+          <h3>3.アガリ符を選択</h3>
+          <form>
+            <input type="radio" id="other" value="0" v-model="a">
+            <label for="other">なし</label>
+            <input type="radio" id="tsumo" value="2" v-model="a">
+            <label for="tsumo">ツモ(+2符)</label>
+            <input type="radio" id="ron" value="10" v-model="a">
+            <label for="ron">メンゼンロン(+10符)</label>
+            <br>
+            <div>{{ a }} 符</div>
+          </form>
+        </div>
+        <div id="atama">
+          <h3>4.アタマが役牌の場合は選択</h3>
+          <form>
+            <input type="radio" id="none" value="0" v-model="m">
+            <label for="none">なし</label>
+            <input type="radio" id="yaku" value="2" v-model="m">
+            <label for="yaku">役牌(+2符)</label>
+            <br>
+            <div>{{ m }} 符</div>
+          </form>
+        </div>
+        <div id="machi">
+          <h3>5.待ち方を選択</h3>
+          <form>
+            <input type="radio" id="none" value="0" v-model="ma">
+            <label for="none">両面</label>
+            <input type="radio" id="ryan" value="2" v-model="ma">
+            <label for="ryan">両面以外(+2符)</label>
+            <br>
+            <div>{{ ma }} 符</div>
+          </form>
+        </div>
+        <div id="mentsu">
+          <h3>6.面子に刻子や槓子が存在する場合は合計の符を入力</h3>
+          <p>1つにつき
+            <br>刻子: 2-8→4符 それ以外→8符
+            <br>槓子: 2-8→16符 それ以外→32符
+            <br>鳴いた場合は1/2にする
+          </p>
+          <form>
+            <input v-model="men" placeholder="合計符数を入力(ない場合は0を入力)">
+            <br>
+            {{ men }} 符
+            <br>
+          </form>
+        </div>
+      </div>
     </div>
-    <div id="opt">
-      <div id="agari">
-        <h3>3.アガリ符を選択</h3>
-        <form>
-          <input type="radio" id="other" value="0" v-model="a">
-          <label for="other">なし</label>
-          <input type="radio" id="tsumo" value="2" v-model="a">
-          <label for="tsumo">ツモ(+2符)</label>
-          <input type="radio" id="ron" value="10" v-model="a">
-          <label for="ron">メンゼンロン(+10符)</label>
-          <br>
-          <div>{{ a }} 符</div>
-        </form>
-      </div>
-      <div id="atama">
-        <h3>4.アタマが役牌の場合は選択</h3>
-        <form>
-          <input type="radio" id="none" value="0" v-model="m">
-          <label for="none">なし</label>
-          <input type="radio" id="yaku" value="2" v-model="m">
-          <label for="yaku">役牌(+2符)</label>
-          <br>
-          <div>{{ m }} 符</div>
-        </form>
-      </div>
-      <div id="machi">
-        <h3>5.待ち方を選択</h3>
-        <form>
-          <input type="radio" id="none" value="0" v-model="ma">
-          <label for="none">両面</label>
-          <input type="radio" id="ryan" value="2" v-model="ma">
-          <label for="ryan">両面以外(+2符)</label>
-          <br>
-          <div>{{ ma }} 符</div>
-        </form>
-      </div>
-      <div id="mentsu">
-        <h3>6.面子に刻子や槓子が存在する場合は合計の符を入力</h3>
-        <p>1つにつき
-          <br>刻子: 2-8→4符 それ以外→8符
-          <br>槓子: 2-8→16符 それ以外→32符
-          <br>鳴いた場合は1/2にする
-        </p>
-        <form>
-          <input v-model="men" placeholder="合計符数を入力">
-          <br>
-          {{ men }} 符
-          <br>
-        </form>
-      </div>
+    <div id="btn">
+      <button @click="cal=!cal">Caliculate!</button>
     </div>
-    <div id="result">
+    <div id="result" v-if="cal">
       <p>
         <strong>
-          合計{{sumfu}} 符
-          <br>
           {{yaku}}翻{{ce}}符
           <br>
           親: {{totaloya}}点
@@ -104,7 +112,8 @@ export default {
       a: 0,
       m: 0,
       ma: 0,
-      men: 0
+      men: 0,
+      cal: false
     };
   },
   computed: {
@@ -118,7 +127,9 @@ export default {
       );
     },
     ce: function() {
-      if (this.sumfu === 25) {
+      if (this.sumfu === 18) {
+        return 20;
+      } else if (this.sumfu === 25) {
         return 25;
       } else {
         return Math.ceil(parseInt(this.sumfu, 10) / 10) * 10;
@@ -167,23 +178,13 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
+<style>
 .marjong {
   display: inline-block;
   text-align: center;
 }
-
-.base {
-  display: inline-block;
-  text-align: left;
-}
-
-.opt {
-  display: inline-block;
-  text-align: left;
-}
-
-.result {
-  font-size: 50pt;
+.btn {
+  width: 160pt;
+  height: 100pt;
 }
 </style>
