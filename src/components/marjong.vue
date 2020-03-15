@@ -4,7 +4,7 @@
     <div id="base">
       <div id="yaku">
         <h3>1.役数を選択(役満は13、ダブル役満は14を選択)</h3>
-        <select name="yaku" v-model="yaku" v-on:change="modify">
+        <select name="yaku" v-model="yaku">
           <option v-for="yaku in yakus" name="yaku" :value="yaku">{{ yaku }}</option>
         </select>
         <label>役</label>

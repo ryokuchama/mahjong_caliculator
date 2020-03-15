@@ -1,16 +1,16 @@
 <template>
   <div id="app">
-    <HelloWorld msg="🀄️Marjong Caliculator🀄️"/>
+    <marjong msg="🀄️Marjong Caliculator🀄️"/>
   </div>
 </template>
 
 <script>
-import HelloWorld from "./components/HelloWorld";
+import marjong from "./components/marjong";
 
 export default {
   name: "App",
   components: {
-    HelloWorld
+    marjong
   }
 };
 </script>
