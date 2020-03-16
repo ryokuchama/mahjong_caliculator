@@ -82,7 +82,7 @@
       </div>
     </div>
     <div id="btn">
-      <button @click="cal=!cal">Caliculate!</button>
+      <button @click="cal=!cal">Calculate!</button>
     </div>
     <div id="result" v-if="cal">
       <p>
@@ -157,16 +157,16 @@ export default {
         case 14:
           return 96000;
         default:
-          if (this.yaku === 4 && this.ce > 30) {
+          if ((this.yaku === 3 && this.ce > 60)
+          || (this.yaku === 4 && this.ce > 30)) {
             return 12000;
           } else return this.ce * this.sumyaku * 6;
       }
     },
     ko: function() {
-      if (
+      if (this.yaku > 4 ||
         (this.yaku === 3 && this.ce > 60) ||
-        (this.yaku === 4 && this.ce > 30) ||
-        this.yaku > 4
+        (this.yaku === 4 && this.ce > 30)       
       ) {
         return this.oya / 1.5;
       } else return this.ce * this.sumyaku * 4;
