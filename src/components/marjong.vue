@@ -82,7 +82,7 @@
       </div>
     </div>
     <div id="btn">
-      <button @click="cal=!cal">Caliculate!</button>
+      <button @click="cal=!cal">Calculate!</button>
     </div>
     <div id="result" v-if="cal">
       <p>
