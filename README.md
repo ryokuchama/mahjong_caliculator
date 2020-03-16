@@ -1,5 +1,5 @@
-# Marjong Caliculator
-[Marjong Calicurator](https://marjong-caliculator.netlify.com/)
+# Marjong Calculator
+[Marjong Calculator](https://marjong-calculator.netlify.com/)
 ## 環境
 Vue.js + Netlify  
 ## 動機
