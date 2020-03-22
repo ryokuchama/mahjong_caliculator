@@ -91,7 +91,7 @@
           <br>
           親: {{totaloya}}点 (ツモ: {{oyatsumo}}オール)
           <br>
-          子: {{totalko}}点 (ツモ: 親{{oyapay}}, 子{{kopay}})
+          子: {{totalko}}点 (ツモ: 親{{oyapay}} 子{{kopay}})
         </strong>
       </p>
     </div>
