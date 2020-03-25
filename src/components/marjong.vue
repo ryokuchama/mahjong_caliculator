@@ -166,10 +166,9 @@ export default {
       }
     },
     ko: function() {
-      if (
-        this.yaku > 4 ||
+      if (this.yaku > 4 ||
         (this.yaku === 3 && this.ce > 60) ||
-        (this.yaku === 4 && this.ce > 30)
+        (this.yaku === 4 && this.ce > 30)       
       ) {
         return this.oya / 1.5;
       } else return this.ce * this.sumyaku * 4;
