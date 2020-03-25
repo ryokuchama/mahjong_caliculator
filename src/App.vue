@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <marjong msg="🀄️Marjong Calculator🀄️"/>
+    <marjong msg="🀄️️麻雀得点計算機🀄️️"/>
   </div>
 </template>
 

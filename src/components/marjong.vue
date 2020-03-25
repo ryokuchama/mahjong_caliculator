@@ -89,9 +89,9 @@
         <strong>
           {{yaku}}翻{{ce}}符
           <br>
-          親: {{totaloya}}点
+          親: {{totaloya}}点 (ツモ: {{oyatsumo}}オール)
           <br>
-          子: {{totalko}}点
+          子: {{totalko}}点 (ツモ: 親{{oyapay}} 子{{kopay}})
         </strong>
       </p>
     </div>
@@ -157,8 +157,10 @@ export default {
         case 14:
           return 96000;
         default:
-          if ((this.yaku === 3 && this.ce > 60)
-          || (this.yaku === 4 && this.ce > 30)) {
+          if (
+            (this.yaku === 3 && this.ce > 60) ||
+            (this.yaku === 4 && this.ce > 30)
+          ) {
             return 12000;
           } else return this.ce * this.sumyaku * 6;
       }
@@ -176,6 +178,15 @@ export default {
     },
     totalko: function() {
       return Math.ceil(this.ko / 100) * 100;
+    },
+    oyatsumo: function() {
+      return Math.ceil(this.totaloya / 300) * 100;
+    },
+    oyapay: function() {
+      return Math.ceil(this.totalko / 200) * 100;
+    },
+    kopay: function() {
+      return Math.ceil(this.totalko / 400) * 100;
     }
   }
 };
